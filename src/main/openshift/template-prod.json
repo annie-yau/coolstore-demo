@@ -543,79 +543,31 @@
             }
         },
         {
-            "kind": "Route",
+             "kind": "ServiceAccount",
             "apiVersion": "v1",
             "metadata": {
-                "creationTimestamp": null,
-                "name": "${JENKINS_SERVICE_NAME}"
+                "name": "coolstore-serviceaccount"
             },
-            "spec": {
-                "tls": {
-                    "insecureEdgeTerminationPolicy": "Redirect",
-                    "termination": "edge"
-                },
-                "to": {
-                    "kind": "Service",
-                    "name": "${JENKINS_SERVICE_NAME}"
+            "secrets": [
+                {
+                    "name": "coolstore-secret"
                 }
-            }
-        },
-        {
-            "kind": "DeploymentConfig",
-            "apiVersion": "v1",
-            "metadata": {
-                "creationTimestamp": null,
-                "name": "${JENKINS_SERVICE_NAME}"
-            },
-        {
-            "kind": "ServiceAccount",
-            "apiVersion": "v1",
-            "metadata": {
-                "annotations": {
-                    "serviceaccounts.openshift.io/oauth-redirectreference.jenkins": "{\"kind\":\"OAuthRedirectReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"Route\",\"name\":\"${JENKINS_SERVICE_NAME}\"}}"
-                },
-                "name": "${JENKINS_SERVICE_NAME}"
-            }
+            ]
         },
         {
             "kind": "RoleBinding",
             "apiVersion": "v1",
             "groupNames": null,
             "metadata": {
-                "name": "ci_admin"
+                "name": "coolstore-serviceaccount_view"
             },
             "roleRef": {
-                "name": "edit"
+                "name": "view"
             },
-            "subjects": [
-                {
-                    "kind": "ServiceAccount",
-                    "name": "${JENKINS_SERVICE_NAME}"
-                }
-            ]
-        },
-        {
-            "kind": "Service",
-            "apiVersion": "v1",
-            "metadata": {
-                "name": "${JNLP_SERVICE_NAME}"
-            },
-            "spec": {
-                "ports": [
-                    {
-                        "name": "agent",
-                        "nodePort": 0,
-                        "port": 50000,
-                        "protocol": "TCP",
-                        "targetPort": 50000
-                    }
-                ],
-                "selector": {
-                    "name": "${JENKINS_SERVICE_NAME}"
-                },
-                "sessionAffinity": "None",
-                "type": "ClusterIP"
-            }
+            "subjects": [{
+                "kind": "ServiceAccount",
+                "name": "coolstore-serviceaccount"
+            }]
         },
         {
             "kind": "RoleBinding",

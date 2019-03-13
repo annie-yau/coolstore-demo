@@ -227,7 +227,7 @@
                         "kind": "ImageStreamTag",
                         "name": "coolstore:latest"
                     }
-                },
+                }
             }
         },
         {

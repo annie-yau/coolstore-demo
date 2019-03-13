@@ -188,6 +188,49 @@
             }
         },
         {
+            "kind": "ImageStream",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "coolstore",
+                "labels": {
+                    "application": "coolstore",
+                    "build": "coolstore"
+                }
+            }
+        },
+        {
+            "kind": "BuildConfig",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "coolstore",
+                "labels": {
+                    "application": "coolstore"
+                }
+            },
+            "spec": {
+                "source": {
+                    "type": "Binary",
+                    "binary": {}
+                },
+                "strategy": {
+                    "type": "Source",
+                    "sourceStrategy": {
+                        "from": {
+                            "kind": "ImageStreamTag",
+                            "namespace": "${IMAGE_STREAM_NAMESPACE}",
+                            "name": "jboss-eap70-openshift:1.4"
+                        }
+                    }
+                },
+                "output": {
+                    "to": {
+                        "kind": "ImageStreamTag",
+                        "name": "coolstore:latest"
+                    }
+                },
+            }
+        },
+        {
             "kind": "DeploymentConfig",
             "apiVersion": "v1",
             "metadata": {
@@ -217,7 +260,7 @@
                         ],
                         "from": {
                             "kind": "ImageStreamTag",
-                            "name": "coolstore:prod"
+                            "name": "coolstore:dev"
                         }
                     }
                 },

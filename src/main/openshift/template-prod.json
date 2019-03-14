@@ -217,7 +217,7 @@
                         ],
                         "from": {
                             "kind": "ImageStreamTag",
-                            "name": "coolstore:dev"
+                            "name": "coolstore:latest"
                         }
                     }
                 },

@@ -3,12 +3,10 @@ pipeline {
     stages {
         stage('Continuous Integration') {
             def mvnHome = tool 'maven-3.5.4'
-            steps {
-                sh '''
-                    ${mvnHome}/bin/mvn -Popenshift package
-                    '''
-                }
-            }
+            sh '''
+                ${mvnHome}/bin/mvn -Popenshift package
+                '''
+        }
         stage('Continous Delivery') {
         steps {
                 sh '''

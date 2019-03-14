@@ -1,11 +1,13 @@
 pipeline {
     agent any
+    tools {
+    maven 'apache-maven-3.5.4'
+    }
     stages {
         stage('Continuous Integration') {
-            def mvnHome = tool 'maven-3.5.4'
-            sh '''
-                ${mvnHome}/bin/mvn -Popenshift package
-                '''
+        steps {
+            sh 'mvn -Popenshift package'
+            }
         }
         stage('Continous Delivery') {
         steps {

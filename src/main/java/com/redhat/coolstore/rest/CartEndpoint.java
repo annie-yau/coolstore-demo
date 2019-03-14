@@ -15,6 +15,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+// testing commit
+
 @SessionScoped
 @Path("/cart")
 public class CartEndpoint implements Serializable {

@@ -2,9 +2,10 @@ pipeline {
     agent any
     stages {
         stage('Continuous Integration') {
+            def mvnHome = tool 'maven-3.5.4'
             steps {
                 sh '''
-                    mvn -Popenshift package
+                    ${mvnHome}/bin/mvn -Popenshift package
                     '''
                 }
             }

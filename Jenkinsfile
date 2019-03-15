@@ -5,7 +5,7 @@ pipeline {
     }
   
     // Reference the GitLab connection name from your Jenkins Global configuration (http://JENKINS_URL/configure, GitLab section)
-    properties([
+    option([
         gitLabConnection('your-gitlab-connection-name'),
         pipelineTriggers([
             [

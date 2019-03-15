@@ -5,13 +5,12 @@ pipeline {
     }
   
     // Reference the GitLab connection name from your Jenkins Global configuration (http://JENKINS_URL/configure, GitLab section)
-    option([
-        gitLabConnection('your-gitlab-connection-name'),
-        pipelineTriggers([
-            [
-                $class: 'GitLabPushTrigger',
+    options {
+        gitLabConnection('gitlab')
+    }
+    triggers {
+        gitlab( triggerOnPush: true, 
                 branchFilterType: 'All',
-                triggerOnPush: true,
                 triggerOnMergeRequest: false,
                 triggerOpenMergeRequestOnPush: "never",
                 triggerOnNoteRequest: true,
@@ -26,10 +25,10 @@ pipeline {
                 acceptMergeRequestOnSuccess: false,
                 branchFilterType: "NameBasedFilter",
                 includeBranchesSpec: "release/qat",
-                excludeBranchesSpec: "",
-            ]
-        ])
-    ])
+                excludeBranchesSpec: ""
+        )
+    }
+    
     
     stages {
         stage('Continuous Integration') {

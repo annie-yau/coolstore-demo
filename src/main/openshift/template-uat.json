@@ -173,7 +173,7 @@
             "kind": "Route",
             "apiVersion": "v1",
             "metadata": {
-                "name": "www",
+                "name": "www-uat",
                 "labels": {
                     "application": "coolstore-uat"
                 },

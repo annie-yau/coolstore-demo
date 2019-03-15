@@ -3,6 +3,7 @@ pipeline {
     tools {
     maven 'apache-maven-3.5.4'
     }
+    withCredentials([string(credentialsId: 'Abcd@123', variable: 'OPENSHIFT_PW')])
     stages {
         stage('Continuous Integration') {
         steps {

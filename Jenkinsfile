@@ -3,6 +3,36 @@ pipeline {
     tools {
     maven 'apache-maven-3.5.4'
     }
+    // Define your secret project token here
+    def project_token = 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEF'
+
+    // Reference the GitLab connection name from your Jenkins Global configuration (http://JENKINS_URL/configure, GitLab section)
+    properties([
+        gitLabConnection('your-gitlab-connection-name'),
+        pipelineTriggers([
+            [
+                $class: 'GitLabPushTrigger',
+                branchFilterType: 'All',
+                triggerOnPush: true,
+                triggerOnMergeRequest: false,
+                triggerOpenMergeRequestOnPush: "never",
+                triggerOnNoteRequest: true,
+                noteRegex: "Jenkins please retry a build",
+                skipWorkInProgressMergeRequest: true,
+                secretToken: project_token,
+                ciSkip: false,
+                setBuildDescription: true,
+                addNoteOnMergeRequest: true,
+                addCiMessage: true,
+                addVoteOnMergeRequest: true,
+                acceptMergeRequestOnSuccess: false,
+                branchFilterType: "NameBasedFilter",
+                includeBranchesSpec: "release/qat",
+                excludeBranchesSpec: "",
+            ]
+        ])
+    ])
+    
     stages {
         stage('Continuous Integration') {
         steps {

@@ -3,7 +3,7 @@ pipeline {
     tools {
     maven 'apache-maven-3.5.4'
     }
-    withCredentials([string(credentialsId: 'Abcd@123', variable: 'OPENSHIFT_PW')])
+    wrap([$class: 'MaskPasswordsBuildWrapper', varPasswordPairs: [[password: "${OPENSHIFT_PW}", var: 'Abcd@123']]])
     stages {
         stage('Continuous Integration') {
         steps {

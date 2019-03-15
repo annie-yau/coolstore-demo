@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Continous Delivery') {
         steps {
-            withCredentials([string(credentialsId: 'Abcd@123', variable: 'OPENSHIFT_PW')]) {
+            withCredentials([string(credentialsId: 'OPENSHIFT_PW', variable: 'OPENSHIFT_PW')]) {
                     sh '''
                         oc login https://52.184.24.45:8443 -u technet -p ${OPENSHIFT_PW} --insecure-skip-tls-verify=true
                         oc new-project coolstore

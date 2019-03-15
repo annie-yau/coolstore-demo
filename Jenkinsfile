@@ -3,9 +3,7 @@ pipeline {
     tools {
     maven 'apache-maven-3.5.4'
     }
-    // Define your secret project token here
-    def project_token = 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEF'
-
+  
     // Reference the GitLab connection name from your Jenkins Global configuration (http://JENKINS_URL/configure, GitLab section)
     properties([
         gitLabConnection('your-gitlab-connection-name'),
@@ -19,7 +17,7 @@ pipeline {
                 triggerOnNoteRequest: true,
                 noteRegex: "Jenkins please retry a build",
                 skipWorkInProgressMergeRequest: true,
-                secretToken: project_token,
+                secretToken: "abcdefghijklmnopqrstuvwxyz0123456789ABCDEF",
                 ciSkip: false,
                 setBuildDescription: true,
                 addNoteOnMergeRequest: true,
